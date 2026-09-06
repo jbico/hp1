@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>JINSHAR · Business System</title>
+
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ============================================================
+           ROOT · DESIGN SYSTEM
+           ============================================================ */
+        :root {
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --primary-dark: #020617;
+
+            /* Cash Sale - Emerald Night */
+            --cash-bg: #064e3b;
+            --cash-light: #d1fae5;
+            --cash-gradient: linear-gradient(145deg, #065f46, #0d9488);
+
+            /* Challan Sale - Sapphire Night */
+            --challan-bg: #1e3a5f;
+            --challan-light: #dbeafe;
+            --challan-gradient: linear-gradient(145deg, #1e3a5f, #3b82f6);
+
+            /* Payment - Amethyst Night */
+            --payment-bg: #4c1d95;
+            --payment-light: #ede9fe;
+            --payment-gradient: linear-gradient(145deg, #4c1d95, #8b5cf6);
+
+            /* Report - Ruby Night */
+            --report-bg: #9b1c1c;
+            --report-light: #fee2e2;
+            --report-gradient: linear-gradient(145deg, #7f1d1d, #ef4444);
+
+            /* Neutrals */
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --card-shadow: 0 8px 40px rgba(15, 23, 42, 0.08);
+            --card-shadow-hover: 0 16px 60px rgba(15, 23, 42, 0.14);
+
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #94a3b8;
+
+            --border: #e2e8f0;
+
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            --font: 'Inter', -apple-system, system-ui, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at 5% 5%, rgba(13, 148, 136, 0.06), transparent 35%),
+                radial-gradient(circle at 95% 95%, rgba(124, 58, 237, 0.06), transparent 35%),
+                var(--bg);
+            color: var(--text-primary);
+            font-family: var(--font);
+            font-size: 14px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 10px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0d9488;
+            border-radius: 10px;
+        }
+
+        .app {
+            max-width: 560px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 0 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .header {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin: 10px 0 14px;
+            padding: 12px 16px;
+            border-radius: var(--radius-lg);
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(20px) saturate(1.6);
+            -webkit-backdrop-filter: blur(20px) saturate(1.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.3);
+            transition: var(--transition);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(145deg, #14b8a6, #0d9488);
+            color: #fff;
+            font-size: 20px;
+            font-weight: 950;
+            box-shadow: 0 6px 24px rgba(13, 148, 136, 0.4);
+            transition: var(--transition);
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                box-shadow: 0 6px 24px rgba(13, 148, 136, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 36px rgba(13, 148, 136, 0.6);
+            }
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .brand-sub {
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: rgba(255, 255, 255, 0.45);
+            margin-top: 4px;
+        }
+
+        .connection {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px 5px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 9px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .connection::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #475569;
+            transition: var(--transition);
+            flex-shrink: 0;
+            animation: blinkDot 2s ease-in-out infinite;
+        }
+
+        @keyframes blinkDot {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .connection.online::before {
+            background: #34d399;
+            box-shadow: 0 0 16px rgba(52, 211, 153, 0.5);
+        }
+        .connection.online {
+            color: #d1fae5;
+        }
+
+        .connection.offline::before {
+            background: #f87171;
+            box-shadow: 0 0 16px rgba(248, 113, 113, 0.4);
+        }
+        .connection.offline {
+            color: #fca5a5;
+        }
+
+        /* ============================================================
+           MAIN
+           ============================================================ */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-bottom: 16px;
+        }
+
+        /* ============================================================
+           MENU GRID
+           ============================================================ */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            animation: fadeUp 0.6s ease 0.1s both;
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .menu-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 120px;
+            padding: 16px 14px;
+            border: 0;
+            border-radius: var(--radius-md);
+            color: #fff;
+            text-align: left;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition-bounce), box-shadow var(--transition);
+            transform: translateY(0);
+        }
+
+        .menu-card::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            bottom: -30px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            pointer-events: none;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.08) 100%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .menu-card:active {
+            transform: scale(0.95);
+            transition-duration: 0.08s;
+        }
+
+        .menu-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.13);
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(4px);
+            transition: var(--transition);
+        }
+
+        .menu-card:hover .menu-icon {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .menu-title {
+            display: block;
+            font-size: 15px;
+            font-weight: 900;
+            letter-spacing: -0.2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-description {
+            display: block;
+            margin-top: 4px;
+            font-size: 10px;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-cash {
+            background: var(--cash-gradient);
+        }
+        .menu-challan {
+            background: var(--challan-gradient);
+        }
+        .menu-payment {
+            background: var(--payment-gradient);
+        }
+        .menu-report {
+            background: var(--report-gradient);
+        }
+
+        /* ============================================================
+           PANELS
+           ============================================================ */
+        .panel {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-lg);
+            padding: 16px 18px 20px;
+            box-shadow: var(--card-shadow);
+            animation: panelSlide 0.35s ease;
+        }
+
+        @keyframes panelSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(18px) scale(0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .panel.hidden {
+            display: none !important;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1.5px solid var(--border);
+        }
+
+        .panel-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+        }
+
+        .panel-title .emoji {
+            font-size: 20px;
+        }
+
+        .close-btn {
+            width: 36px;
+            height: 36px;
+            border: 0;
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 17px;
+            display: grid;
+            place-items: center;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            background: #fee2e2;
+            color: #dc2626;
+            transform: rotate(90deg);
+        }
+
+        /* ============================================================
+           ENTRY FORM - Night Theme per Module
+           ============================================================ */
+        .entry-form {
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        /* Cash Form - Emerald Night */
+        .cash-form {
+            background: linear-gradient(145deg, #064e3b, #0d9488);
+            color: #fff;
+        }
+        .cash-form label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .cash-form input,
+        .cash-form select {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .cash-form input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .cash-form input:focus,
+        .cash-form select:focus {
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .cash-form .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .cash-form .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Challan Form - Sapphire Night */
+        .challan-form {
+            background: linear-gradient(145deg, #1e3a5f, #3b82f6);
+            color: #fff;
+        }
+        .challan-form label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .challan-form input,
+        .challan-form select {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .challan-form input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .challan-form input:focus,
+        .challan-form select:focus {
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .challan-form .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .challan-form .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Payment Form - Amethyst Night */
+        .payment-form {
+            background: linear-gradient(145deg, #4c1d95, #8b5cf6);
+            color: #fff;
+        }
+        .payment-form label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .payment-form input,
+        .payment-form select {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .payment-form input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .payment-form input:focus,
+        .payment-form select:focus {
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .payment-form .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .payment-form .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .entry-form .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+        }
+
+        .entry-form .field {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .entry-form .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .entry-form label {
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .entry-form input,
+        .entry-form select {
+            width: 100%;
+            border-radius: var(--radius-sm);
+            padding: 10px 13px;
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 500;
+            outline: none;
+            transition: var(--transition);
+            min-height: 42px;
+        }
+
+        .entry-form input[type="date"] {
+            color-scheme: dark;
+        }
+
+        .entry-form input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .entry-form input[type="number"]::-webkit-outer-spin-button,
+        .entry-form input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .entry-form .form-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            grid-column: 1 / -1;
+        }
+
+        /* ============================================================
+           DATA TABLE
+           ============================================================ */
+        .data-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: #fff;
+            margin-top: 4px;
+        }
+
+        .data-table {
+            width: 100%;
+            min-width: 500px;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .data-table th {
+            background: var(--bg);
+            color: var(--text-secondary);
+            font-size: 9px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1.5px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .data-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .data-table tr:hover td {
+            background: #f8fafc;
+        }
+
+        .data-table .remove-row {
+            border: 0;
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 9px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .data-table .remove-row:hover {
+            background: #fecaca;
+            transform: scale(0.94);
+        }
+
+        .data-table .empty-row td {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 20px 10px;
+            font-style: italic;
+        }
+
+        /* ============================================================
+           TOTAL BAR
+           ============================================================ */
+        .total-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding: 13px 16px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #bbf7d0;
+            transition: var(--transition);
+        }
+
+        .total-bar span {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--text-muted);
+        }
+
+        .total-bar strong {
+            font-size: 19px;
+            font-weight: 950;
+            color: #0d9488;
+            letter-spacing: -0.3px;
+        }
+
+        /* ============================================================
+           BUTTONS - Beautiful Design
+           ============================================================ */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: var(--radius-sm);
+            padding: 11px 20px;
+            font-family: var(--font);
+            font-weight: 800;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            letter-spacing: 0.2px;
+            min-height: 42px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 60%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        .btn:active {
+            transform: scale(0.94);
+        }
+
+        /* Cash Save Button */
+        .btn-cash {
+            background: linear-gradient(145deg, #065f46, #0d9488);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.3);
+        }
+        .btn-cash:hover {
+            box-shadow: 0 6px 28px rgba(13, 148, 136, 0.45);
+            transform: translateY(-2px);
+        }
+
+        /* Challan Save Button */
+        .btn-challan {
+            background: linear-gradient(145deg, #1e3a5f, #3b82f6);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+        .btn-challan:hover {
+            box-shadow: 0 6px 28px rgba(59, 130, 246, 0.45);
+            transform: translateY(-2px);
+        }
+
+        /* Payment Save Button */
+        .btn-payment {
+            background: linear-gradient(145deg, #4c1d95, #8b5cf6);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+        }
+        .btn-payment:hover {
+            box-shadow: 0 6px 28px rgba(139, 92, 246, 0.45);
+            transform: translateY(-2px);
+        }
+
+        /* Report Generate Button */
+        .btn-report {
+            background: linear-gradient(145deg, #7f1d1d, #ef4444);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+        }
+        .btn-report:hover {
+            box-shadow: 0 6px 28px rgba(239, 68, 68, 0.45);
+            transform: translateY(-2px);
+        }
+
+        /* Secondary / Add Button */
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ============================================================
+           KPI
+           ============================================================ */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 14px 0 18px;
+        }
+
+        .kpi {
+            position: relative;
+            overflow: hidden;
+            padding: 14px 16px;
+            border-radius: var(--radius-sm);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .kpi:hover {
+            background: #fff;
+            border-color: #0d9488;
+            box-shadow: var(--card-shadow);
+            transform: translateY(-2px);
+        }
+
+        .kpi::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #0d9488;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .kpi-label {
+            display: block;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--text-muted);
+        }
+
+        .kpi-value {
+            display: block;
+            font-size: 20px;
+            font-weight: 950;
+            color: var(--text-primary);
+            margin-top: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        /* ============================================================
+           REPORT TABLES
+           ============================================================ */
+        .report-section {
+            margin-top: 18px;
+        }
+
+        .report-section h4 {
+            margin: 0 0 8px;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: -0.1px;
+            color: var(--primary);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: #fff;
+            transition: var(--transition);
+        }
+
+        .table-container:hover {
+            border-color: #ccfbf1;
+        }
+
+        table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        th {
+            background: var(--bg);
+            color: var(--text-secondary);
+            font-size: 9px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1.5px solid var(--border);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 9px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        tr:hover td {
+            background: #f8fafc;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .status-paid {
+            color: #0d9488;
+            background: #ccfbf1;
+        }
+        .status-partial {
+            color: #d97706;
+            background: #fef3c7;
+        }
+        .status-due {
+            color: #dc2626;
+            background: #fee2e2;
+        }
+
+        /* ============================================================
+           LOADING
+           ============================================================ */
+        .loading {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid var(--border);
+            border-top-color: #0d9488;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================================
+           TOAST
+           ============================================================ */
+        .toast {
+            position: fixed;
+            z-index: 2000;
+            left: 50%;
+            bottom: 28px;
+            transform: translateX(-50%) translateY(24px);
+            max-width: 90%;
+            padding: 13px 22px;
+            border-radius: var(--radius-sm);
+            background: var(--primary-dark);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .toast.success {
+            background: #0d9488;
+        }
+        .toast.error {
+            background: #dc2626;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (min-width: 700px) {
+            .app {
+                max-width: 1100px;
+            }
+            .menu-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .menu-card {
+                min-height: 150px;
+                padding: 20px 18px;
+            }
+            .kpi-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            main {
+                padding-bottom: 30px;
+            }
+            .entry-form .form-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .entry-form .form-actions {
+                grid-column: 1 / -1;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .field.full {
+                grid-column: auto;
+            }
+            .menu-card {
+                min-height: 108px;
+                padding: 14px 12px;
+            }
+            .menu-title {
+                font-size: 14px;
+            }
+            .panel {
+                padding: 14px 14px 18px;
+            }
+            .panel-title {
+                font-size: 16px;
+            }
+            .total-bar strong {
+                font-size: 17px;
+            }
+            .kpi-value {
+                font-size: 17px;
+            }
+            .btn {
+                padding: 10px 14px;
+                font-size: 11px;
+                min-height: 38px;
+            }
+            .entry-form .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- =========================================================
+        HEADER
+        ========================================================= -->
+        <header class="header">
+            <div class="header-top">
+                <div class="logo-area">
+                    <div class="logo">J</div>
+                    <div>
+                        <div class="brand-name">HARISHPUR 1</div>
+                        <div class="brand-sub"></div>
+                    </div>
+                </div>
+                <div id="connectionStatus" class="connection">Connecting…</div>
+            </div>
+        </header>
+
+        <!-- =========================================================
+        MAIN
+        ========================================================= -->
+        <main>
+
+            <!-- =========================================================
+            MENU
+            ========================================================= -->
+            <section class="menu-grid">
+
+                <button class="menu-card menu-cash" onclick="openPanel('cashPanel')">
+                    <div class="menu-icon">💵</div>
+                    <span class="menu-title">Cash Sale</span>
+                    <span class="menu-description">Record cash sales</span>
+                </button>
+
+                <button class="menu-card menu-challan" onclick="openPanel('challanPanel')">
+                    <div class="menu-icon">🧾</div>
+                    <span class="menu-title">Challan Sale</span>
+                    <span class="menu-description">One product per challan</span>
+                </button>
+
+                <button class="menu-card menu-payment" onclick="openPanel('paymentPanel')">
+                    <div class="menu-icon">💳</div>
+                    <span class="menu-title">Payment Entry</span>
+                    <span class="menu-description">Cash / Bank payment</span>
+                </button>
+
+                <button class="menu-card menu-report" onclick="openPanel('reportPanel')">
+                    <div class="menu-icon">📊</div>
+                    <span class="menu-title">Reports</span>
+                    <span class="menu-description">Daily report</span>
+                </button>
+
+            </section>
+
+            <!-- =========================================================
+            CASH SALE PANEL
+            ========================================================= -->
+            <section id="cashPanel" class="panel hidden">
+                <div class="panel-header">
+                    <h2 class="panel-title"><span class="emoji">💵</span> Cash Sale</h2>
+                    <button class="close-btn" onclick="closePanels()">✕</button>
+                </div>
+
+                <!-- Cash Form - Emerald Night -->
+                <div class="entry-form cash-form">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Date</label>
+                            <input type="date" id="cashDate" value="">
+                        </div>
+                        <div class="field">
+                            <label>Product</label>
+                            <select id="cashProduct" class="product-select">
+                                <option value="">Select Product</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Rate</label>
+                            <input type="number" id="cashRate" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="field">
+                            <label>Quantity</label>
+                            <input type="number" id="cashQty" min="0" step="0.001" placeholder="0">
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary" onclick="addCashEntry()">＋ Add Entry</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="data-table-wrap">
+                    <table class="data-table" id="cashTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Product</th>
+                                <th>Rate</th>
+                                <th>Qty</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cashTableBody">
+                            <tr class="empty-row">
+                                <td colspan="7">No entries yet. Add one above.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="total-bar">
+                    <span>Total Cash Sale</span>
+                    <strong id="cashGrandTotal">₹0.00</strong>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-cash" onclick="saveCashSales()">✓ Save All</button>
+                </div>
+            </section>
+
+            <!-- =========================================================
+            CHALLAN SALE PANEL
+            ========================================================= -->
+            <section id="challanPanel" class="panel hidden">
+                <div class="panel-header">
+                    <h2 class="panel-title"><span class="emoji">🧾</span> Challan Sale</h2>
+                    <button class="close-btn" onclick="closePanels()">✕</button>
+                </div>
+
+                <!-- Challan Form - Sapphire Night -->
+                <div class="entry-form challan-form">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Date</label>
+                            <input type="date" id="challanDate" value="">
+                        </div>
+                        <div class="field">
+                            <label>Customer Name</label>
+                            <input type="text" id="challanCustomer" placeholder="Customer name">
+                        </div>
+                        <div class="field">
+                            <label>Challan No</label>
+                            <input type="text" id="challanNo" placeholder="Challan number">
+                        </div>
+                        <div class="field">
+                            <label>Product</label>
+                            <select id="challanProduct" class="product-select">
+                                <option value="">Select Product</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Rate</label>
+                            <input type="number" id="challanRate" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="field">
+                            <label>Quantity</label>
+                            <input type="number" id="challanQty" min="0" step="0.001" placeholder="0">
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary" onclick="addChallanEntry()">＋ Add Entry</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="data-table-wrap">
+                    <table class="data-table" id="challanTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Challan</th>
+                                <th>Product</th>
+                                <th>Rate</th>
+                                <th>Qty</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="challanTableBody">
+                            <tr class="empty-row">
+                                <td colspan="9">No entries yet. Add one above.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="total-bar">
+                    <span>Total Challan Sale</span>
+                    <strong id="challanGrandTotal">₹0.00</strong>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-challan" onclick="saveChallanSales()">✓ Save All</button>
+                </div>
+            </section>
+
+            <!-- =========================================================
+            PAYMENT PANEL
+            ========================================================= -->
+            <section id="paymentPanel" class="panel hidden">
+                <div class="panel-header">
+                    <h2 class="panel-title"><span class="emoji">💳</span> Payment Entry</h2>
+                    <button class="close-btn" onclick="closePanels()">✕</button>
+                </div>
+
+                <!-- Payment Form - Amethyst Night -->
+                <div class="entry-form payment-form">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Date</label>
+                            <input type="date" id="paymentDate" value="">
+                        </div>
+                        <div class="field">
+                            <label>Customer Name</label>
+                            <input type="text" id="paymentCustomer" placeholder="Customer name">
+                        </div>
+                        <div class="field">
+                            <label>Challan No</label>
+                            <input type="text" id="paymentNo" placeholder="Challan number">
+                        </div>
+                        <div class="field">
+                            <label>Payment Method</label>
+                            <select id="paymentMethod">
+                                <option value="Cash">Cash</option>
+                                <option value="Bank">Bank</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Amount</label>
+                            <input type="number" id="paymentAmount" min="0.01" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="field">
+                            <label>Remarks</label>
+                            <input type="text" id="paymentRemarks" placeholder="Optional">
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn btn-secondary" onclick="addPaymentEntry()">＋ Add Entry</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="data-table-wrap">
+                    <table class="data-table" id="paymentTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Challan</th>
+                                <th>Method</th>
+                                <th>Amount</th>
+                                <th>Remarks</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentTableBody">
+                            <tr class="empty-row">
+                                <td colspan="8">No entries yet. Add one above.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="total-bar">
+                    <span>Total Payment</span>
+                    <strong id="paymentGrandTotal">₹0.00</strong>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-payment" onclick="savePayments()">✓ Save All</button>
+                </div>
+            </section>
+
+            <!-- =========================================================
+            REPORT PANEL
+            ========================================================= -->
+            <section id="reportPanel" class="panel hidden">
+                <div class="panel-header">
+                    <h2 class="panel-title"><span class="emoji">📊</span> Daily Report</h2>
+                    <button class="close-btn" onclick="closePanels()">✕</button>
+                </div>
+                <div class="form-grid">
+                    <div class="field">
+                        <label>Select Date</label>
+                        <input type="date" id="reportDate">
+                    </div>
+                    <div class="field" style="display:flex;align-items:end;">
+                        <button class="btn btn-report" style="width:100%;" onclick="generateReport()">
+                            Generate Report
+                        </button>
+                    </div>
+                </div>
+                <div id="reportArea"></div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- =========================================================
+    TOAST
+    ========================================================= -->
+    <div id="toast" class="toast"></div>
+
+    <!-- =========================================================
+    SCRIPT
+    ========================================================= -->
+    <script>
+        /* ============================================================
+           API CONFIGURATION
+           ============================================================ */
+        const API_URL =
+            'https://script.google.com/macros/s/AKfycbxcyPTLsNo9yZMpSu8nHoVSOc0C2cMlONP0AcMZhpRhh8VvDXhkEOY2CChyyxk9M6PeFw/exec';
+
+        /* ============================================================
+           GLOBALS
+           ============================================================ */
+        let products = [];
+        let currentReport = null;
+
+        // Entry arrays
+        let cashEntries = [];
+        let challanEntries = [];
+        let paymentEntries = [];
+
+        /* ============================================================
+           TODAY ISO
+           ============================================================ */
+        function todayISO() {
+            const d = new Date();
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return y + '-' + m + '-' + day;
+        }
+
+        /* ============================================================
+           INIT
+           ============================================================ */
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('reportDate').value = todayISO();
+            document.getElementById('cashDate').value = todayISO();
+            document.getElementById('challanDate').value = todayISO();
+            document.getElementById('paymentDate').value = todayISO();
+            initializeApp();
+        });
+
+        /* ============================================================
+           INITIALIZE APP
+           ============================================================ */
+        async function initializeApp() {
+            if (API_URL.includes('PASTE_YOUR')) {
+                setConnection(false, 'Set API URL');
+                return;
+            }
+
+            try {
+                const response = await apiGet('ping');
+                if (response.ok) {
+                    setConnection(true, '● Online');
+                    const productResponse = await apiGet('products');
+                    if (productResponse.ok) {
+                        products = productResponse.products || [];
+                        refreshProductDropdowns();
+                    }
+                } else {
+                    throw new Error(response.error || 'API Error');
+                }
+            } catch (error) {
+                setConnection(false, '● Offline');
+                toast('API connection failed', 'error');
+            }
+        }
+
+        /* ============================================================
+           CONNECTION
+           ============================================================ */
+        function setConnection(online, text) {
+            const el = document.getElementById('connectionStatus');
+            el.textContent = text;
+            el.classList.toggle('online', online);
+            el.classList.toggle('offline', !online);
+        }
+
+        /* ============================================================
+           API GET
+           ============================================================ */
+        async function apiGet(action, extra = '') {
+            const url = API_URL + '?action=' + encodeURIComponent(action) + extra;
+            const response = await fetch(url, { method: 'GET' });
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            return await response.json();
+        }
+
+        /* ============================================================
+           API POST
+           ============================================================ */
+        async function apiPost(payload) {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            return await response.json();
+        }
+
+        /* ============================================================
+           PANEL
+           ============================================================ */
+        function openPanel(panelId) {
+            ['cashPanel', 'challanPanel', 'paymentPanel', 'reportPanel'].forEach(function(id) {
+                document.getElementById(id).classList.add('hidden');
+            });
+            const panel = document.getElementById(panelId);
+            panel.classList.remove('hidden');
+            setTimeout(function() {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 60);
+        }
+
+        function closePanels() {
+            ['cashPanel', 'challanPanel', 'paymentPanel', 'reportPanel'].forEach(function(id) {
+                document.getElementById(id).classList.add('hidden');
+            });
+        }
+
+        /* ============================================================
+           ESCAPE
+           ============================================================ */
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>"']/g, function(char) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' } [char];
+            });
+        }
+
+        /* ============================================================
+           MONEY
+           ============================================================ */
+        function money(value) {
+            const num = Number(value || 0);
+            return '₹' + num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        /* ============================================================
+           PRODUCT OPTIONS
+           ============================================================ */
+        function productOptions() {
+            if (!products.length) {
+                return '<option value="">Select Product</option>';
+            }
+            return '<option value="">Select Product</option>' +
+                products.map(function(p) {
+                    return '<option value="' + escapeHTML(p) + '">' + escapeHTML(p) + '</option>';
+                }).join('');
+        }
+
+        function refreshProductDropdowns() {
+            document.querySelectorAll('.product-select').forEach(function(select) {
+                const old = select.value;
+                select.innerHTML = productOptions();
+                select.value = old;
+            });
+        }
+
+        /* ============================================================
+           CASH ENTRY
+           ============================================================ */
+        function addCashEntry() {
+            const date = document.getElementById('cashDate').value;
+            const product = document.getElementById('cashProduct').value;
+            const rate = parseFloat(document.getElementById('cashRate').value) || 0;
+            const qty = parseFloat(document.getElementById('cashQty').value) || 0;
+
+            if (!date || !product || qty <= 0) {
+                toast('Please fill all fields (Date, Product, Quantity > 0)', 'error');
+                return;
+            }
+
+            const amount = rate * qty;
+            cashEntries.push({ date, product, rate, qty, amount });
+            renderCashTable();
+            updateCashTotal();
+            document.getElementById('cashRate').value = '';
+            document.getElementById('cashQty').value = '';
+            document.getElementById('cashProduct').value = '';
+        }
+
+        function renderCashTable() {
+            const tbody = document.getElementById('cashTableBody');
+            if (cashEntries.length === 0) {
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="7">No entries yet. Add one above.</td></tr>';
+                return;
+            }
+            let html = '';
+            cashEntries.forEach(function(entry, index) {
+                html += `<tr>
+              <td>${index+1}</td>
+              <td>${escapeHTML(entry.date)}</td>
+              <td>${escapeHTML(entry.product)}</td>
+              <td>${money(entry.rate)}</td>
+              <td>${entry.qty}</td>
+              <td>${money(entry.amount)}</td>
+              <td><button class="remove-row" onclick="removeCashEntry(${index})">✕</button></td>
+            </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function removeCashEntry(index) {
+            cashEntries.splice(index, 1);
+            renderCashTable();
+            updateCashTotal();
+        }
+
+        function updateCashTotal() {
+            let total = cashEntries.reduce(function(sum, e) { return sum + e.amount; }, 0);
+            document.getElementById('cashGrandTotal').textContent = money(total);
+        }
+
+        async function saveCashSales() {
+            if (cashEntries.length === 0) { toast('Add at least one Cash Sale', 'error'); return; }
+            const items = cashEntries.map(function(e) {
+                return { date: e.date, product: e.product, rate: e.rate, qty: e.qty };
+            });
+            try {
+                showLoadingButton(true);
+                const result = await apiPost({ action: 'cashSale', items });
+                if (!result.ok) throw new Error(result.error);
+                toast(result.message, 'success');
+                cashEntries = [];
+                renderCashTable();
+                updateCashTotal();
+            } catch (error) {
+                toast(error.message, 'error');
+            } finally {
+                showLoadingButton(false);
+            }
+        }
+
+        /* ============================================================
+           CHALLAN ENTRY
+           ============================================================ */
+        function addChallanEntry() {
+            const date = document.getElementById('challanDate').value;
+            const customer = document.getElementById('challanCustomer').value.trim();
+            const challanNo = document.getElementById('challanNo').value.trim();
+            const product = document.getElementById('challanProduct').value;
+            const rate = parseFloat(document.getElementById('challanRate').value) || 0;
+            const qty = parseFloat(document.getElementById('challanQty').value) || 0;
+
+            if (!date || !customer || !challanNo || !product || qty <= 0) {
+                toast('Please fill all required fields', 'error');
+                return;
+            }
+
+            const amount = rate * qty;
+            challanEntries.push({ date, customer, challanNo, product, rate, qty, amount });
+            renderChallanTable();
+            updateChallanTotal();
+            document.getElementById('challanCustomer').value = '';
+            document.getElementById('challanNo').value = '';
+            document.getElementById('challanRate').value = '';
+            document.getElementById('challanQty').value = '';
+            document.getElementById('challanProduct').value = '';
+        }
+
+        function renderChallanTable() {
+            const tbody = document.getElementById('challanTableBody');
+            if (challanEntries.length === 0) {
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="9">No entries yet. Add one above.</td></tr>';
+                return;
+            }
+            let html = '';
+            challanEntries.forEach(function(entry, index) {
+                html += `<tr>
+              <td>${index+1}</td>
+              <td>${escapeHTML(entry.date)}</td>
+              <td>${escapeHTML(entry.customer)}</td>
+              <td>${escapeHTML(entry.challanNo)}</td>
+              <td>${escapeHTML(entry.product)}</td>
+              <td>${money(entry.rate)}</td>
+              <td>${entry.qty}</td>
+              <td>${money(entry.amount)}</td>
+              <td><button class="remove-row" onclick="removeChallanEntry(${index})">✕</button></td>
+            </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function removeChallanEntry(index) {
+            challanEntries.splice(index, 1);
+            renderChallanTable();
+            updateChallanTotal();
+        }
+
+        function updateChallanTotal() {
+            let total = challanEntries.reduce(function(sum, e) { return sum + e.amount; }, 0);
+            document.getElementById('challanGrandTotal').textContent = money(total);
+        }
+
+        async function saveChallanSales() {
+            if (challanEntries.length === 0) { toast('Add at least one Challan', 'error'); return; }
+            const items = challanEntries.map(function(e) {
+                return { date: e.date, customer: e.customer, challanNo: e.challanNo, product: e.product, rate: e
+                        .rate, qty: e.qty };
+            });
+            try {
+                const result = await apiPost({ action: 'challanSale', items });
+                if (!result.ok) throw new Error(result.error);
+                toast(result.message, 'success');
+                challanEntries = [];
+                renderChallanTable();
+                updateChallanTotal();
+            } catch (error) {
+                toast(error.message, 'error');
+            }
+        }
+
+        /* ============================================================
+           PAYMENT ENTRY
+           ============================================================ */
+        function addPaymentEntry() {
+            const date = document.getElementById('paymentDate').value;
+            const customer = document.getElementById('paymentCustomer').value.trim();
+            const challanNo = document.getElementById('paymentNo').value.trim();
+            const method = document.getElementById('paymentMethod').value;
+            const amount = parseFloat(document.getElementById('paymentAmount').value) || 0;
+            const remarks = document.getElementById('paymentRemarks').value.trim();
+
+            if (!date || !customer || !challanNo || amount <= 0) {
+                toast('Please fill all required fields', 'error');
+                return;
+            }
+
+            paymentEntries.push({ date, customer, challanNo, method, amount, remarks });
+            renderPaymentTable();
+            updatePaymentTotal();
+            document.getElementById('paymentCustomer').value = '';
+            document.getElementById('paymentNo').value = '';
+            document.getElementById('paymentAmount').value = '';
+            document.getElementById('paymentRemarks').value = '';
+        }
+
+        function renderPaymentTable() {
+            const tbody = document.getElementById('paymentTableBody');
+            if (paymentEntries.length === 0) {
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="8">No entries yet. Add one above.</td></tr>';
+                return;
+            }
+            let html = '';
+            paymentEntries.forEach(function(entry, index) {
+                html += `<tr>
+              <td>${index+1}</td>
+              <td>${escapeHTML(entry.date)}</td>
+              <td>${escapeHTML(entry.customer)}</td>
+              <td>${escapeHTML(entry.challanNo)}</td>
+              <td>${escapeHTML(entry.method)}</td>
+              <td>${money(entry.amount)}</td>
+              <td>${escapeHTML(entry.remarks)}</td>
+              <td><button class="remove-row" onclick="removePaymentEntry(${index})">✕</button></td>
+            </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function removePaymentEntry(index) {
+            paymentEntries.splice(index, 1);
+            renderPaymentTable();
+            updatePaymentTotal();
+        }
+
+        function updatePaymentTotal() {
+            let total = paymentEntries.reduce(function(sum, e) { return sum + e.amount; }, 0);
+            document.getElementById('paymentGrandTotal').textContent = money(total);
+        }
+
+        async function savePayments() {
+            if (paymentEntries.length === 0) { toast('Add at least one Payment', 'error'); return; }
+            const items = paymentEntries.map(function(e) {
+                return { date: e.date, customer: e.customer, challanNo: e.challanNo, method: e.method, amount: e
+                        .amount, remarks: e.remarks };
+            });
+            try {
+                const result = await apiPost({ action: 'payment', items });
+                if (!result.ok) throw new Error(result.error);
+                toast(result.message, 'success');
+                paymentEntries = [];
+                renderPaymentTable();
+                updatePaymentTotal();
+            } catch (error) {
+                toast(error.message, 'error');
+            }
+        }
+
+        /* ============================================================
+           REPORT GENERATE
+           ============================================================ */
+        async function generateReport() {
+            const date = document.getElementById('reportDate').value;
+            if (!date) { toast('Select a date', 'error'); return; }
+            const area = document.getElementById('reportArea');
+            area.innerHTML =
+                '<div class="loading"><div class="spinner"></div>Generating report…</div>';
+            try {
+                const result = await apiGet('report', '&date=' + encodeURIComponent(date));
+                if (!result.ok) throw new Error(result.error);
+                currentReport = result.report;
+                renderReport(result.report);
+            } catch (error) {
+                area.innerHTML = '';
+                toast(error.message, 'error');
+            }
+        }
+
+        /* ============================================================
+           RENDER REPORT – ALL TABLES SEPARATE
+           ============================================================ */
+        function renderReport(report) {
+            const summary = report.summary;
+            let html = '';
+
+            // KPI Cards
+            html += `
+            <div class="kpi-grid">
+              <div class="kpi">
+                <span class="kpi-label">Cash Sale</span>
+                <span class="kpi-value">${money(summary.cashSale)}</span>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Challan Sale</span>
+                <span class="kpi-value">${money(summary.challanSale)}</span>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Total Sale</span>
+                <span class="kpi-value">${money(summary.totalSale)}</span>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Payment</span>
+                <span class="kpi-value">${money(summary.payment)}</span>
+              </div>
+            </div>
+            <div class="actions">
+              <button class="btn btn-report" onclick="printReport()">🖨 Print / PDF</button>
+              <button class="btn btn-secondary" onclick="downloadCSV()" style="background:#e2e8f0;color:#0f172a;border:1px solid #cbd5e1;">⬇ Download CSV</button>
+            </div>
+          `;
+
+            // Cash Sales Table
+            html += createTable('Cash Sales', ['Date', 'Product', 'Rate', 'Qty', 'Amount'],
+                report.cashSales.map(function(item) {
+                    return [item.date, item.product, money(item.rate), item.qty, money(item.amount)];
+                })
+            );
+
+            // Challan Sales Table
+            html += createTable('Challan Sales', ['Date', 'Customer', 'Challan', 'Product', 'Rate', 'Qty', 'Amount'],
+                report.challanSales.map(function(item) {
+                    return [item.date, item.customer, item.challanNo, item.product, money(item.rate), item.qty,
+                        money(item.amount)
+                    ];
+                })
+            );
+
+            // Payments Table
+            html += createTable('Payments', ['Date', 'Customer', 'Challan', 'Method', 'Amount', 'Remarks'],
+                report.payments.map(function(item) {
+                    return [item.date, item.customer, item.challanNo, item.method, money(item.amount), item
+                        .remarks];
+                })
+            );
+
+            // Outstanding Table
+            html += createOutstandingTable(report.outstanding);
+
+            // Product Summary Table
+            html += createTable('Product Summary', ['Product', 'Quantity', 'Amount'],
+                report.productSummary.map(function(item) {
+                    return [item.product, item.qty, money(item.amount)];
+                })
+            );
+
+            document.getElementById('reportArea').innerHTML = html;
+        }
+
+        /* ============================================================
+           CREATE TABLE
+           ============================================================ */
+        function createTable(title, headers, rows) {
+            let html = '<div class="report-section"><h4>' + title + '</h4><div class="table-container"><table><thead><tr>';
+            headers.forEach(function(h) { html += '<th>' + escapeHTML(h) + '</th>'; });
+            html += '</tr></thead><tbody>';
+            if (rows.length === 0) {
+                html += '<tr><td colspan="' + headers.length + '" style="text-align:center;">No data</td></tr>';
+            } else {
+                rows.forEach(function(row) {
+                    html += '<tr>';
+                    row.forEach(function(v) { html += '<td>' + escapeHTML(v) + '</td>'; });
+                    html += '</tr>';
+                });
+            }
+            html += '</tbody></table></div></div>';
+            return html;
+        }
+
+        /* ============================================================
+           OUTSTANDING TABLE
+           ============================================================ */
+        function createOutstandingTable(rows) {
+            let html =
+                '<div class="report-section"><h4>Challan Outstanding</h4><div class="table-container"><table><thead><tr><th>Challan</th><th>Customer</th><th>Product</th><th>Sale</th><th>Paid</th><th>Due</th><th>Status</th></tr></thead><tbody>';
+            if (rows.length === 0) {
+                html += '<tr><td colspan="7" style="text-align:center;">No Outstanding Challan</td></tr>';
+            } else {
+                rows.forEach(function(item) {
+                    let cls = 'status-due';
+                    if (item.status === 'PAID') cls = 'status-paid';
+                    else if (item.status === 'PARTIAL') cls = 'status-partial';
+                    html += '<tr><td>' + escapeHTML(item.challanNo) + '</td><td>' + escapeHTML(item.customer) +
+                        '</td><td>' + escapeHTML(item.product) + '</td><td>' + money(item.saleAmount) +
+                        '</td><td>' + money(item.paidAmount) + '</td><td>' + money(item.due) +
+                        '</td><td><span class="status-badge ' + cls + '">' + item.status + '</span></td></tr>';
+                });
+            }
+            html += '</tbody></table></div></div>';
+            return html;
+        }
+
+        /* ============================================================
+           PRINT
+           ============================================================ */
+        function printReport() {
+            if (!currentReport) { toast('Generate report first', 'error'); return; }
+            const content = document.getElementById('reportArea').innerHTML;
+            const w = window.open('', '_blank');
+            if (!w) { toast('Please allow popups', 'error'); return; }
+            w.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head><title>JINSHAR Report ${currentReport.date}</title>
+            <style>
+              body{font-family:Inter,Arial;padding:24px;color:#111;background:#fff}
+              h1{margin:0;font-size:24px}
+              h2{margin:0 0 4px;font-size:18px;font-weight:600}
+              h4{margin-top:24px;font-size:14px}
+              table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:10px}
+              th,td{border:1px solid #ccc;padding:6px 8px;text-align:left}
+              th{background:#f0f2f6;font-weight:700}
+              .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 16px}
+              .kpi{border:1px solid #ddd;padding:10px 12px;border-radius:6px}
+              .kpi-label{display:block;font-size:9px;color:#666;font-weight:600;text-transform:uppercase}
+              .kpi-value{font-weight:800;font-size:18px}
+              .actions{display:none}
+              .status-badge{display:inline-block;padding:2px 10px;border-radius:100px;font-size:8px;font-weight:700}
+              .status-paid{color:#0d9488;background:#ccfbf1}
+              .status-partial{color:#d97706;background:#fef3c7}
+              .status-due{color:#dc2626;background:#fee2e2}
+              .report-section{margin-top:16px}
+              .table-container{overflow-x:auto}
+            </style>
+            </head>
+            <body>
+              <h1>JINSHAR</h1>
+              <h2>Business Report</h2>
+              <p style="color:#666;font-size:13px;">Date: ${currentReport.date}</p>
+              ${content}
+            </body>
+            </html>
+          `);
+            w.document.close();
+            setTimeout(function() { w.focus();
+                w.print(); }, 400);
+        }
+
+        /* ============================================================
+           CSV
+           ============================================================ */
+        function downloadCSV() {
+            if (!currentReport) { toast('Generate report first', 'error'); return; }
+            const report = currentReport;
+            const lines = [];
+
+            function addSection(title, headers, rows) {
+                lines.push(title);
+                lines.push(headers.join(','));
+                rows.forEach(function(row) {
+                    lines.push(row.map(function(v) {
+                        return '"' + String(v ?? '').replace(/"/g, '""') + '"';
+                    }).join(','));
+                });
+                lines.push('');
+            }
+
+            addSection('Cash Sales', ['Date', 'Product', 'Rate', 'Quantity', 'Amount'],
+                report.cashSales.map(function(i) { return [i.date, i.product, i.rate, i.qty, i.amount]; })
+            );
+
+            addSection('Challan Sales', ['Date', 'Customer', 'Challan No', 'Product', 'Rate', 'Quantity', 'Amount'],
+                report.challanSales.map(function(i) { return [i.date, i.customer, i.challanNo, i.product, i.rate, i
+                        .qty, i.amount
+                    ]; })
+            );
+
+            addSection('Payments', ['Date', 'Customer', 'Challan No', 'Method', 'Amount', 'Remarks'],
+                report.payments.map(function(i) { return [i.date, i.customer, i.challanNo, i.method, i.amount, i
+                        .remarks
+                    ]; })
+            );
+
+            addSection('Outstanding', ['Challan', 'Customer', 'Product', 'Sale', 'Paid', 'Due', 'Status'],
+                report.outstanding.map(function(i) { return [i.challanNo, i.customer, i.product, i.saleAmount, i
+                        .paidAmount, i.due, i.status
+                    ]; })
+            );
+
+            addSection('Product Summary', ['Product', 'Quantity', 'Amount'],
+                report.productSummary.map(function(i) { return [i.product, i.qty, i.amount]; })
+            );
+
+            const csv = '\ufeff' + lines.join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'JINSHAR_Report_' + report.date + '.csv';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        /* ============================================================
+           TOAST
+           ============================================================ */
+        function toast(message, type) {
+            const el = document.getElementById('toast');
+            el.textContent = message;
+            el.className = 'toast show ' + (type || '');
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(function() { el.className = 'toast'; }, 3000);
+        }
+
+        /* ============================================================
+           LOADING BUTTON
+           ============================================================ */
+        function showLoadingButton(loading) {
+            document.querySelectorAll('.btn-cash, .btn-challan, .btn-payment').forEach(function(btn) {
+                btn.disabled = loading;
+                btn.style.opacity = loading ? '0.6' : '1';
+            });
+        }
+    </script>
+
+</body>
+</html>
